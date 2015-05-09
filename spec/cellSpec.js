@@ -1,3 +1,5 @@
+var Cell = require('../lib/cell');
+
 describe ('Cell', function(){
 
   var cell;
@@ -14,9 +16,9 @@ describe ('Cell', function(){
 
     beforeEach(function(){
       cell.placeShip();
-    })
+    });
 
-    it('can have a ship', function(){
+    it('has a ship', function(){
       expect(cell.hasShip).toBe(true);
     });
 
@@ -28,12 +30,12 @@ describe ('Cell', function(){
   });
 
   it('is not hit when initialised', function(){
-    expect(cell.isHit).toBe(false)
+    expect(cell.isHit).toBe(false);
   });
 
   it('can be hit', function(){
-    cell.hit()
-    expect(cell.isHit).toBe(true)
+    cell.hit();
+    expect(cell.isHit).toBe(true);
   });
 
 
