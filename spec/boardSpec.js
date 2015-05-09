@@ -7,7 +7,7 @@ describe('Board', function(){
   beforeEach(function(){
     cell = jasmine.createSpyObj('cell', ['placeShip', 'hit']);
     cells = [cell];
-    ship = jasmine.createSpyObj('ship', ['']);
+    ship = {};
     ships = [ship];
     board = new Board(cells);
   });
@@ -60,5 +60,22 @@ describe('Board', function(){
 
   });
 
+  describe('cell has ship', function(){
+
+    beforeEach(function(){
+      cell.hasShip = true;
+    });
+
+    it('ships sunk', function(){
+      cell.isHit = true;
+      expect(board.allShipsSunk()).toBe(true);
+    });
+
+    it('ship not sunk', function(){
+      cell.isHit = false;
+      expect(board.allShipsSunk()).toBe(false);
+    });
+
+  });
 
 });
