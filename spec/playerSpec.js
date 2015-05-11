@@ -44,4 +44,13 @@ describe('Player', function(){
 
   });
 
+  it('has not lost the game', function(){
+    expect(player.lost()).toBe(false);
+  });
+
+  it('has not lost the game', function(){
+    board.allShipsSunk = true;
+    expect(player.lost()).toBe(true);
+  });
+
 });
