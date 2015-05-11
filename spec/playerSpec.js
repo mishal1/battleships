@@ -4,9 +4,7 @@ describe('Player', function(){
   var player, board;
 
   beforeEach(function(){
-    // playerBoard = jasmine.createSpyObj('playerboard', ['']);
-    board = jasmine.createSpyObj('board', ['hit', 'placeShip']);
-    cell = jasmine.createSpyObj('cell', ['']);
+    board = jasmine.createSpyObj('board', ['hit', 'tryToPlaceShip']);
     player = new Player('Mishal', board);
   });
 
@@ -19,13 +17,13 @@ describe('Player', function(){
   });
 
   it('has a turn to hit on opponents board', function(){
-    player.hit(board, cell);
+    player.hit(board, 1);
     expect(board.hit).toHaveBeenCalled();
   });
 
   it('places ships on their own board', function(){
-    player.placeShip(cell);
-    expect(board.placeShip).toHaveBeenCalled();
+    player.placeShip(1);
+    expect(board.tryToPlaceShip).toHaveBeenCalled();
   });
 
 });

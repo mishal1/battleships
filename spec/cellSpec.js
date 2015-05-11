@@ -26,6 +26,10 @@ describe ('Cell', function(){
       cell.removeShip();
       expect(cell.hasShip).toBe(false);
     });
+
+    it('can be hit with no ship', function(){
+      expect(cell.hit()).toEqual("Hit!");
+    });
     
   });
 
@@ -38,5 +42,8 @@ describe ('Cell', function(){
     expect(cell.isHit).toBe(true);
   });
 
+  it('can be hit with no ship', function(){
+    expect(cell.hit()).toEqual("Missed!");
+  });
 
 });
