@@ -19,7 +19,7 @@ describe('Player', function(){
   });
 
   it('has a turn to hit on opponents board', function(){
-    player.hit(board, 1);
+    player.hit(1, board);
     expect(board.hit).toHaveBeenCalled();
   });
 

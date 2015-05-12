@@ -26,6 +26,7 @@ describe('Game', function(){
       player2 = jasmine.createSpyObj('player', ['ready', 'hit']);
       player2.ready = function(){ return true; };
       player2.lost = function(){ return false; };
+      player2.name = 'Mishal';
       game.add(player1);
     });
 
@@ -82,7 +83,7 @@ describe('Game', function(){
         });
 
         it('declares a winner', function(){
-          expect(game.turn(1)).toEqual(player2);
+          expect(game.turn(1)).toEqual('Mishal wins the game');
         });
 
       });
