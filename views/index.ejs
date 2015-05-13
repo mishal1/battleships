@@ -1,0 +1,121 @@
+<html>
+
+  <head>
+  <link rel="stylesheet" href="stylesheets/foundation.css">
+    <link rel="stylesheet" href="stylesheets/application.css">
+  <script src="vendor/jquery.js"></script>
+    <script src="vendor/modernizr.js"></script>
+  </head>
+
+  <body>
+    
+    <h1>BATTLESHIPS</h1>
+
+
+    <text id='askUserName'>
+      <h4>What is your name?</h4>
+      <input id='usernameinput'>
+    </text>
+    <button id='playgame'>Play game</button>
+
+    <text id='placeshipstext'>
+      Click where you would like to place your ships
+    </text>
+
+    <section id='boards'>
+      <div id='opponentboard' class="gameboard">
+
+        <div class='tile'>
+          <div class="symbol"></div>
+        </div>
+
+        <div class='tile'>
+          <div class="symbol"></div>
+        </div>
+
+        <div class='tile'>
+          <div class="symbol"></div>
+        </div>
+
+        <div class='tile'>
+          <div class="symbol"></div>
+        </div>
+
+        <div class='tile'>
+          <div class="symbol"></div>
+        </div>
+
+        <div class='tile'>
+          <div class="symbol"></div>
+        </div>
+
+        <div class='tile'>
+          <div class="symbol"></div>
+        </div>
+   
+        <div class='tile'>
+          <div class="symbol"></div>
+        </div>
+
+        <div class='tile'>
+          <div class="symbol"></div>
+        </div>  
+      </div>
+
+      <div id='userboard' class="gameboard">
+
+        <div id='tile' data-pick="1" class='tile blue'>
+          <div class="symbol" id='user-1'>
+          </div>
+        </div>
+
+        <div data-pick="2" class='tile blue'>
+          <div class="symbol" id='user-2'>
+          </div>
+        </div>
+
+        <div data-pick="3" class='tile blue'>
+          <div class="symbol" id='user-3'>
+          </div>
+        </div>
+
+        <div data-pick="4" class='tile blue'>
+          <div class="symbol" id='user-4'>
+          </div>
+        </div>
+
+        <div data-pick="5" class='tile blue'>
+          <div class="symbol" id='user-5'>
+
+          </div>
+        </div>
+
+        <div data-pick="6" class='tile blue'>
+          <div class="symbol" id='user-6'>
+
+          </div>
+        </div>
+
+        <div data-pick="7" class='tile blue'>
+          <div class="symbol" id='user-7'>
+
+          </div>
+        </div>
+   
+        <div data-pick="8" class='tile blue'>
+          <div class="symbol" id='user-8'>
+          </div>
+        </div>
+
+        <div data-pick="9" class='tile blue'>
+          <div class="symbol" id='user-9'>
+          </div>
+        </div>
+
+      </div>          
+    </section>
+
+    <script type="text/javascript" src='js/app.js'></script>
+  </body>
+
+</html>

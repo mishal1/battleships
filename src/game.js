@@ -27,7 +27,11 @@ Game.prototype.ready = function() {
 };
 
 Game.prototype.checkIfReady = function() {
-  return this.players.length == 2 && this.players[0].ready(this.fleet) && this.players[1].ready(this.fleet);
+  return this.full() && this.players[0].ready(this.fleet) && this.players[1].ready(this.fleet);
+};
+
+Game.prototype.full = function() {
+  return this.players.length == 2;
 };
 
 Game.prototype.currentPlayer = function() {

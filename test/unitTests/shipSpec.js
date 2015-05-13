@@ -1,4 +1,4 @@
-var Ship = require('../lib/ship');
+var Ship = require('../../src/ship');
 
 describe ('Ship', function(){
 

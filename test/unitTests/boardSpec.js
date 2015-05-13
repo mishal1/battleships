@@ -1,4 +1,4 @@
-var Board = require('../lib/board');
+var Board = require('../../src/board');
 
 describe('Board', function(){
 

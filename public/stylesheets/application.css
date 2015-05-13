@@ -1,0 +1,85 @@
+h1 {
+  text-align: center;
+}
+
+#playgame {
+  margin: auto;
+  display: block;
+  margin-top: 50px;
+}
+
+#askUserName {
+  position: relative;
+  display: block;
+  text-align: center;
+  margin: 20px;
+}
+
+#usernameinput {
+  border: none;
+  border-bottom: solid;
+  font-size: 20px;
+}
+
+input:focus {
+  outline:none;
+}
+
+.gameboard {
+  width: 400px;
+  height: 400px;
+  position: relative;
+  content: "";
+  margin: 10px;
+  display: inline-block;
+}
+
+#opponentboard {
+  display: none;
+}
+
+#userboard {
+  display: none;
+  margin: auto
+}
+
+.tile{
+  border: 3px solid red;
+  width: 29%;
+  height: 30%;
+  margin: 1%;
+  float: left;
+  cursor: pointer;
+  position: relative;
+  font-size: 20px;
+  border-radius: 4%;
+}
+
+.blue {
+  border: 3px solid rgba(0, 0, 255, 0.78);
+}
+
+#boards {
+  text-align: center;
+}
+
+.symbol{
+  margin: 0 auto;
+  height: 50%;
+  width: 100%;
+  position: absolute;
+  top: 25%;
+}
+
+img {
+  top: -19px;
+  position: relative;
+}
+
+#placeshipstext {
+  display: none;
+  position: relative;
+  text-align: center;
+  margin: 20px;
+  right: 13px;
+}

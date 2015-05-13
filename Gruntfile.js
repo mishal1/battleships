@@ -1,36 +1,58 @@
-module.exports = function(grunt) {
-
-  grunt.initConfig({
-    jasmine_node: {
-      options: {
-        forceExit: true, 
-      }, 
-      all: ['spec/']
+module.exports = function(grunt){
+grunt.initConfig({
+  pkg: grunt.file.readJSON('package.json'),
+  jshint: {
+    options: {
+      node: true, 
+      jasmine: true
     },
-    jshint: {
+    all: [
+    'Gruntfile.js', 
+    './src/*.js',
+    './test/**/*.js'
+    ]
+  },
+  jasmine_node: {
+    options: {
+      forceExit: true, 
+    }, 
+    all: ['test/unitTests/']
+  },
+  mochaTest: {
+    test: {
       options: {
-        node: true, 
-        jasmine: true
+        reporter: 'nyan',
+        quiet: false
       },
-      all: [
-      'Gruntfile.js', 
-      './lib/**/*.js',
-      './spec/**/*.js'
-      ]
-    },
-    watch: {
-      files: [ 
-      './lib/**/*.js',
-      './spec/**/*.js'
-      ], 
-      tasks: ['jasmine_node', 'jshint']
+    src: ['test/acceptanceTests/*.js']
     }
-  });
+  },
+  express: {
+    options:{},
+    dev: {
+      options: {
+        script: './server.js'
+      }
+    }
+  },
+  watch: {
+    files: [ 
+    './src/**/*.js',
+    './test/**/*.js',
+    './public/js/*.js'
+    ], 
+    tasks: ['jasmine_node', 'express', 'mochaTest', 'jshint']
+  }
+});
 
-  grunt.loadNpmTasks('grunt-jasmine-node');
-  grunt.loadNpmTasks('grunt-contrib-jshint');
-  grunt.loadNpmTasks('grunt-contrib-watch');
+grunt.loadNpmTasks('grunt-mocha-cli');
+grunt.loadNpmTasks('grunt-mocha-test');
+grunt.loadNpmTasks('grunt-express-server');
+grunt.loadNpmTasks('grunt-jasmine-node');
+grunt.loadNpmTasks('grunt-contrib-jshint');
+grunt.loadNpmTasks('grunt-contrib-watch');
 
-  grunt.registerTask('default', ['jasmine_node', 'jshint']);
-  grunt.registerTask('jasmine', ['jasmine_node']);
+grunt.registerTask('default',['express','mochaTest','jasmine_node' ]);
+grunt.registerTask('jasmine', ['jasmine_node']);
+
 };

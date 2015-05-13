@@ -1,4 +1,4 @@
-var Cell = require('../lib/cell');
+var Cell = require('../../src/cell');
 
 describe ('Cell', function(){
 

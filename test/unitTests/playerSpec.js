@@ -1,4 +1,4 @@
-var Player = require('../lib/player');
+var Player = require('../../src/player');
 
 describe('Player', function(){
   var player, board, ship;

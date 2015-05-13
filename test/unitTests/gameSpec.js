@@ -1,4 +1,4 @@
-var Game = require('../lib/game');
+var Game = require('../../src/game');
 
 describe('Game', function(){
 

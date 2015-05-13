@@ -1,8 +1,8 @@
-var Cell = require('../lib/cell');
-var Ship = require('../lib/ship');
-var Player = require('../lib/player');
-var Game = require('../lib/game');
-var Board = require('../lib/board');
+var Cell = require('../../src/cell');
+var Ship = require('../../src/ship');
+var Player = require('../../src/player');
+var Game = require('../../src/game');
+var Board = require('../../src/board');
 
 describe('Play game', function(){
 
@@ -96,3 +96,4 @@ describe('Play game', function(){
 
 });
 
+// loop through length, add ship on cell then position += 1 
