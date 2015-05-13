@@ -5,6 +5,11 @@ $('#playgame').click(function(){
   $('#playgame').hide();
   $('#userboard').show();
   $('#placeshipstext').css("display", "block");
+  $.ajax({
+        url: '/addUser',
+        type: 'POST',
+        data: {name: name}
+      });
 });
 
 $('.blue').on('click', function(){

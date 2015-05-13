@@ -47,9 +47,23 @@ describe('Homepage', function() {
       .isExisting('img', function(err, isExisting) {
         expect(isExisting).to.equal(false);
       })
-      .click('#tile')
+      .click('#first-tile')
       .isExisting('img', function(err, isExisting) {
         expect(isExisting).to.equal(true);
+      })
+      .call(done);
+  });
+
+  it('asks to wait for second player when all ships have been placed', function(done){
+    client
+      .url('http://localhost:3000')
+      .click('#playgame')
+      .waitForVisible('#userboard')
+      .click('#first-tile')
+      .click('#second-tile')
+      .click('#third-tile')
+      .elements('img', function(err, elements){
+        expect(elements.value.length).to.equal(2);
       })
       .call(done);
   });
