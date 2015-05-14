@@ -3,7 +3,7 @@ $('#playgame').click(function(){
   $('#usernameinput').val('');
   $('#askUserName').hide();
   $('#playgame').hide();
-  $('#userboard').show();
+  $('#userboard').css("display", "inline-block");
   $('#placeshipstext').css("display", "block");
   $.ajax({
         url: '/addUser',

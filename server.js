@@ -18,29 +18,26 @@ app.use(bodyParser.urlencoded({'extended':'true'}));
 
 var session = require('express-session');
 app.use(session({ secret: 'cat', resave: true, saveUninitialized: true }));
-
+// seperate routes out and wrap into function so player is only
 var ship = new Ship(1);
 var fleet = [ship, ship];
 var game = new Game(fleet);
-
 app.get('/', function(request, response){
   response.render('index');
-});
-
-io.on('connection', function(socket){
-  console.log('a user connected');
 });
 
 app.post('/addUser', function(request, response){
   var board = setUpBoard();
   var name = request.body.name;
-  var player = addPlayerToGame(board, name);
+  player = addPlayerToGame(board, name);
   session.currentPlayer = player;
 });
 
 app.post('/addShip', function(request, response){
   var playerReady = checkIfGameIsReady(fleet, request.body.pick);
-  response.send(playerReady)
+  response.send(playerReady);
+  if(game.ready())
+    console.log('READY');
 });
 
 http.listen(port, function(){
@@ -48,6 +45,10 @@ http.listen(port, function(){
 });
 
 module.exports = http;
+
+io.on('connection', function(socket){
+  console.log('connected')
+});
 
 var createNewCells = function(array){
   for(var i = 0; i < 9; i++){
