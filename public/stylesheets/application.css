@@ -36,6 +36,7 @@ input:focus {
 
 #opponentboard {
   display: none;
+  margin: auto;
 }
 
 #userboard {
@@ -83,3 +84,18 @@ img {
   margin: 20px;
   right: 13px;
 }
+
+.boardinfo {
+  display: inline-block;
+}
+
+.boardtext {
+  display: none;
+  margin-bottom: 13px;
+  position: relative;
+  right: 8px;
+}
+
+
+
+

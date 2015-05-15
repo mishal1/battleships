@@ -1,14 +1,14 @@
-module.exports.controller = function(app, game){
+var Cell = require('../src/cell');
+var Player = require('../src/player');
+var Board = require('../src/board');
 
-  var Cell = require('../src/cell');
-  var Player = require('../src/player');
-  var Board = require('../src/board');
-  var player
+module.exports.controller = function(app, game, fleet, ship, io){
+
+  var player;
 
   app.get('/', function(request, response){
     response.render('index');
   });
-
 
   app.post('/addUser', function(request, response){
     var board = setUpBoard();
@@ -17,10 +17,12 @@ module.exports.controller = function(app, game){
   });
 
   app.post('/addShip', function(request, response){
-    // var playerReady = checkIfGameIsReady(fleet, request.body.pick);
-    // response.send(playerReady);
-    // if(game.ready())
-    //   console.log('READY');
+    if(game.ready()){
+      io.emit('start game', {message: 'game can finally start'});
+    } else {
+      var playerReady = checkIfGameIsReady(fleet, request.body.pick);
+      response.send(playerReady);
+    }
   });
 
   var createNewCells = function(array){
@@ -47,7 +49,7 @@ module.exports.controller = function(app, game){
   var checkIfGameIsReady = function(fleet, position){
     var ready = player.ready(fleet)
     if(!ready)
-      session.currentPlayer.placeShip(position, ship)
+      player.placeShip(position, ship)
     return ready;
   }
   
