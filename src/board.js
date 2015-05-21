@@ -1,36 +1,25 @@
-function Board(){
-  this.placedShips = [];
+function Board(cells){
+  this.cells = {};
+  this.addCells(cells, this, 1);
 }
 
-Board.prototype.setUp = function(cells) {
-  this.cells = {};
-  var number = 1;
-  var that = this;
+Board.prototype.addCells = function(cells, that, cellNumber) {
   cells.forEach(function(cell){
-    that.cells[number] = cell;
-    number += 1;
+    that.cells[cellNumber] = cell;
+    cellNumber += 1;
   });
 };
 
 Board.prototype.tryToPlaceShip = function(position, ship) {
-  if(this.cells[position].hasShip){
-    return 'Cell already contains a ship';
-  } else {
-    this.placeShip(this.cells[position], ship);
-  }
+  return this.placeShip(this.cells[position], ship);
 };
 
 Board.prototype.placeShip = function(cell, ship) {
-  cell.placeShip();
-  this.placedShips.push(ship);
+  return cell.placeShip();
 };
 
 Board.prototype.hit = function(position) {
-  if(this.cells[position].isHit){
-    return 'Cell has already been hit';
-  } else {
-    this.cells[position].hit();
-  }
+  return this.cells[position].hit();
 };
 
 Board.prototype.allShipsSunk = function() {

@@ -4,19 +4,19 @@ function Cell(){
 }
 
 Cell.prototype.placeShip = function() {
+  if(this.hasShip)
+    return 'Cell already contains a ship';
   this.hasShip = true;
 };
 
-Cell.prototype.removeShip = function() {
-  this.hasShip = false;
-};
-
 Cell.prototype.hit = function() {
+  if(this.isHit)
+    return 'Cell has already been hit!'
   this.isHit = true;
-  return this.message();
+  return this.hitMessage();
 };
 
-Cell.prototype.message = function() {
+Cell.prototype.hitMessage = function() {
   if(this.hasShip)
     return 'Hit!';
   return 'Missed!';

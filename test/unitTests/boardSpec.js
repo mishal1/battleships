@@ -2,21 +2,16 @@ var Board = require('../../src/board');
 
 describe('Board', function(){
 
-  var board, cell, cells, ship;
+  var board, cell, ship;
 
   beforeEach(function(){
     cell = jasmine.createSpyObj('cell', ['placeShip', 'hit']);
     ship = {};
-    board = new Board();
-    board.setUp([cell, cell, cell, cell]);
+    board = new Board([cell, cell, cell, cell]);
   });
 
   it('should have cells', function(){
     expect(board.cells).toEqual({1: cell, 2: cell, 3: cell, 4: cell});
-  });
-
-  it('has no placed ships when initialized', function(){
-    expect(board.placedShips).toEqual([]);
   });
 
   describe('when a ship is placed on the board', function(){
@@ -28,15 +23,6 @@ describe('Board', function(){
 
     it('places ship on board', function(){
       expect(cell.placeShip).toHaveBeenCalled();
-    });
-
-    it('cannot place a ship on a cell that already contains a ship', function(){
-      cell.hasShip = true;
-      expect(board.tryToPlaceShip(1, ship)).toEqual('Cell already contains a ship');
-    });
-
-    it('has a placed ship', function(){
-      expect(board.placedShips).toEqual([ship]);
     });
     
   });
@@ -50,11 +36,6 @@ describe('Board', function(){
 
     it('cell is hit', function(){
       expect(cell.hit).toHaveBeenCalled();
-    });
-
-    it('cannot hit a cell that has already been hit', function(){
-      cell.isHit = true;
-      expect(board.hit(1)).toEqual('Cell has already been hit');
     });
 
   });

@@ -22,13 +22,12 @@ describe ('Cell', function(){
       expect(cell.hasShip).toBe(true);
     });
 
-    it('can remove ship', function(){
-      cell.removeShip();
-      expect(cell.hasShip).toBe(false);
+    it('can be hit with a ship', function(){
+      expect(cell.hit()).toEqual("Hit!");
     });
 
-    it('can be hit with no ship', function(){
-      expect(cell.hit()).toEqual("Hit!");
+    it('cannot place a ship if cell already contains one', function(){
+      expect(cell.placeShip()).toEqual("Cell already contains a ship");
     });
     
   });
@@ -44,6 +43,11 @@ describe ('Cell', function(){
 
   it('can be hit with no ship', function(){
     expect(cell.hit()).toEqual("Missed!");
+  });
+
+  it('cannot be hit more than once', function(){
+    cell.hit();
+    expect(cell.hit()).toEqual("Cell has already been hit!");
   });
 
 });

@@ -54,17 +54,16 @@ describe('Homepage', function() {
       .call(done);
   });
 
-  it('asks to wait for second player when all ships have been placed', function(done){
+  it('user is notified to add ship in empty square', function(done){
     client
       .url('http://localhost:3000')
       .click('#playgame')
       .waitForVisible('#userboard')
       .click('#first-tile')
-      .click('#second-tile')
-      .click('#third-tile')
-      .elements('img', function(err, elements){
-        expect(elements.value.length).to.equal(2);
-      })
+      .click('#first-tile')
+      .getText('body', function(err, text){
+        expect(text).to.equal('That cell contains a ship');
+      })      
       .call(done);
   });
 
