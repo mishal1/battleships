@@ -61,9 +61,22 @@ describe('Homepage', function() {
       .waitForVisible('#userboard')
       .click('#first-tile')
       .click('#first-tile')
-      .getText('body', function(err, text){
-        expect(text).to.equal('That cell contains a ship');
-      })      
+      .getText('#placeshipstext', function(err, text){
+        expect(text).to.equal('Cell already contains a ship!');
+      })   
+      .call(done);
+  });
+
+  it('user is notified to wait for another player', function(done){
+    client
+      .url('http://localhost:3000')
+      .click('#playgame')
+      .waitForVisible('#userboard')
+      .click('#first-tile')
+      .click('#second-tile')
+      .getText('#placeshipstext', function(err, text){
+        expect(text).to.equal('Waiting for another player...');
+      })   
       .call(done);
   });
 

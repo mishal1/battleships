@@ -27,7 +27,7 @@ describe ('Cell', function(){
     });
 
     it('cannot place a ship if cell already contains one', function(){
-      expect(cell.placeShip()).toEqual("Cell already contains a ship");
+      expect(cell.placeShip()).toEqual("Cell already contains a ship!");
     });
     
   });

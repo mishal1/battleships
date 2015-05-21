@@ -18,12 +18,16 @@ describe('Board', function(){
 
     beforeEach(function(){
       cell.hasShip = false;
-      board.tryToPlaceShip(1, ship);
+      board.placeShip(1, ship);
     });
 
     it('places ship on board', function(){
       expect(cell.placeShip).toHaveBeenCalled();
     });
+
+    it('board is not ready', function(){
+      expect(board.set(1)).toBe(false);
+    })
     
   });
 
@@ -55,6 +59,10 @@ describe('Board', function(){
       cell.isHit = false;
       expect(board.allShipsSunk()).toBe(false);
     });
+
+    it('board is ready', function(){
+      expect(board.set(1)).toBe(true);
+    })
 
   });
 

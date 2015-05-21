@@ -5,7 +5,7 @@ function Cell(){
 
 Cell.prototype.placeShip = function() {
   if(this.hasShip)
-    return 'Cell already contains a ship';
+    return 'Cell already contains a ship!';
   this.hasShip = true;
 };
 

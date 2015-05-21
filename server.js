@@ -11,7 +11,8 @@ app.use(express.static(__dirname + '/public'));
 app.use(bodyParser.urlencoded({'extended':'true'}));
 
 var Player = require('./src/player');
-
+var Board = require('./src/board');
+var Cell = require('./src/cell');
 
 var onlineUsers = [];
 
@@ -21,15 +22,26 @@ io.on('connection', function(socket){
   var games = {};
 
   socket.on('add user', function(name){
-    player = new Player(name, socket.id)
+    var cells = [];
+    for(var i = 0; i < 9; i++){
+      var cell = new Cell();
+      cells.push(cell);
+    }
+    var board = new Board(cells);
+    player = new Player(name, socket.id, board);
     onlineUsers.push(player);
-    console.log(onlineUsers);
     if(onlineUsers.length >= 2)
       console.log('2 players');
   });
 
   socket.on('add ship', function(pick){
-    // player.addShip(pick);
+    var message = player.placeShip(pick);
+    socket.emit('place ship', message);
+  });
+
+  socket.on('check board ready', function(){
+    var ready = player.ready(2);
+    socket.emit('check board ready', ready);
   })
 
   socket.on('disconnect', function(){
@@ -37,7 +49,7 @@ io.on('connection', function(socket){
       if(onlineUsers[i].socket == socket.id)
         onlineUsers.splice(i, 1);
     }
-  })
+  });
 
 });
 

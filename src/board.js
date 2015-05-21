@@ -10,12 +10,8 @@ Board.prototype.addCells = function(cells, that, cellNumber) {
   });
 };
 
-Board.prototype.tryToPlaceShip = function(position, ship) {
-  return this.placeShip(this.cells[position], ship);
-};
-
-Board.prototype.placeShip = function(cell, ship) {
-  return cell.placeShip();
+Board.prototype.placeShip = function(position) {
+  return this.cells[position].placeShip();
 };
 
 Board.prototype.hit = function(position) {
@@ -29,6 +25,19 @@ Board.prototype.allShipsSunk = function() {
       result = false;
   }
   return result;
+};
+
+Board.prototype.set = function(fleetLength) {
+  var number = this.placedShipsNumber(0);
+  return number >= fleetLength;
+};
+
+Board.prototype.placedShipsNumber = function(number) {
+  for(var key in this.cells) {
+    if(this.cells[key].hasShip)
+      number += 1
+  }
+  return number;
 };
 
 module.exports = Board;

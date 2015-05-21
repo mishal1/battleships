@@ -4,8 +4,22 @@ function Player(name, socket, board){
   this.board = board;
 }
 
-Player.prototype.addShip = function(pick) {
-  this.board.addShip(pick);
+Player.prototype.hit = function(position, board) {
+  return board.hit(position);
+};
+
+Player.prototype.placeShip = function(position) {
+  return this.board.placeShip(position);
+};
+
+Player.prototype.ready = function(fleetCount) {
+  return this.board.set(fleetCount);
+};
+
+Player.prototype.lost = function() {
+  if(this.board.allShipsSunk)
+    return true;
+  return false;
 };
 
 module.exports = Player;
