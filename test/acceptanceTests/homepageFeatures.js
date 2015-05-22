@@ -75,7 +75,7 @@ describe('Homepage', function() {
       .click('#first-tile')
       .click('#second-tile')
       .getText('#placeshipstext', function(err, text){
-        expect(text).to.equal('Waiting for another player...');
+        expect(text).to.equal('Waiting for opponent...');
       })   
       .call(done);
   });

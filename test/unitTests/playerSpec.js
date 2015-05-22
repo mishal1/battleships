@@ -50,4 +50,9 @@ describe('Player', function(){
     expect(player.lost()).toBe(true);
   });
 
+  it('can set game id', function(){
+    player.gameId = 1;
+    expect(player.gameId).toEqual(1);
+  });
+
 });

@@ -13,25 +13,24 @@ app.use(bodyParser.urlencoded({'extended':'true'}));
 var Player = require('./src/player');
 var Board = require('./src/board');
 var Cell = require('./src/cell');
+var Game = require('./src/game');
 
-var onlineUsers = [];
+var waitingPlayers = [];
+var games = {};
+var id = 1;
 
 io.on('connection', function(socket){
 
   var player;
-  var games = {};
 
   socket.on('add user', function(name){
     var cells = [];
-    for(var i = 0; i < 9; i++){
-      var cell = new Cell();
-      cells.push(cell);
-    }
+    createCells(cells);
     var board = new Board(cells);
     player = new Player(name, socket.id, board);
-    onlineUsers.push(player);
-    if(onlineUsers.length >= 2)
-      console.log('2 players');
+    waitingPlayers.push(player);
+    if(waitingPlayers.length >= 2)
+      setGame();
   });
 
   socket.on('add ship', function(pick){
@@ -45,13 +44,31 @@ io.on('connection', function(socket){
   })
 
   socket.on('disconnect', function(){
-    for(var i = 0; i < onlineUsers.length; i++){
-      if(onlineUsers[i].socket == socket.id)
-        onlineUsers.splice(i, 1);
+    for(var i = 0; i < waitingPlayers.length; i++){
+      if(waitingPlayers[i].socket == socket.id)
+        waitingPlayers.splice(i, 1);
     }
   });
 
 });
+
+var createCells = function(cells){
+  for(var i = 0; i < 9; i++){
+    var cell = new Cell();
+    cells.push(cell);
+  }
+}
+
+var setGame = function(){
+  var game = new Game(waitingPlayers[0], waitingPlayers[1]);
+  for(var i = 0; i < 2; i++){
+    waitingPlayers[0].gameId = id;
+    waitingPlayers.splice(0, 1); 
+  }
+  games[id] = game;
+  id += 1;
+  console.log(games);
+}
 
 app.get('/', function(request, response){
   response.render('index');
