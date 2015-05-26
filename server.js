@@ -45,8 +45,9 @@ io.on('connection', function(socket){
 
   socket.on('check if game can start', function(){
     game = games[player.gameId]
-    if(game.canStart(2)){
-      socket.emit('start game');
+    if(game && game.canStart(2)){
+      io.sockets.connected[game.player1.socket].emit('start game');
+      io.sockets.connected[game.player2.socket].emit('start game');
     }
   })
 
@@ -74,7 +75,6 @@ var setGame = function(){
   }
   games[id] = game;
   id += 1;
-  console.log(games);
 }
 
 app.get('/', function(request, response){

@@ -27,5 +27,5 @@ socket.on('check board ready', function(ready){
 });
 
 socket.on('start game', function(){
-  console.log('game can start');
+  showOpponentBoard();
 })

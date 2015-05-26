@@ -21,3 +21,9 @@ var placeShip = function(message){
     addShipImage(pick);
   }
 };
+
+var showOpponentBoard = function(){
+  $('#opponentboard').css("display", "inline-block");
+  $('.boardtext').css("display", "block");
+  $('#placeshipstext').text(' ');
+}
