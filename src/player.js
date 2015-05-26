@@ -13,7 +13,7 @@ Player.prototype.placeShip = function(position) {
 };
 
 Player.prototype.ready = function(fleetCount) {
-  return this.board.set(fleetCount);
+  return this.board.isSet(fleetCount);
 };
 
 Player.prototype.lost = function() {

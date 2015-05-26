@@ -27,7 +27,7 @@ Board.prototype.allShipsSunk = function() {
   return result;
 };
 
-Board.prototype.set = function(fleetLength) {
+Board.prototype.isSet = function(fleetLength) {
   var number = this.placedShipsNumber(0);
   return number >= fleetLength;
 };

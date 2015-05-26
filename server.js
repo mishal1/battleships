@@ -21,7 +21,7 @@ var id = 1;
 
 io.on('connection', function(socket){
 
-  var player;
+  var player, game;
 
   socket.on('add user', function(name){
     var cells = [];
@@ -41,6 +41,13 @@ io.on('connection', function(socket){
   socket.on('check board ready', function(){
     var ready = player.ready(2);
     socket.emit('check board ready', ready);
+  })
+
+  socket.on('check if game can start', function(){
+    game = games[player.gameId]
+    if(game.canStart(2)){
+      socket.emit('start game');
+    }
   })
 
   socket.on('disconnect', function(){

@@ -4,7 +4,7 @@ describe('Player', function(){
   var player, board, fleetCount;
 
   beforeEach(function(){
-    board = jasmine.createSpyObj('board',['placeShip', 'hit', 'set']);
+    board = jasmine.createSpyObj('board',['placeShip', 'hit', 'isSet']);
     player = new Player('Mishal', 1, board);
     fleetCount = 1;
   });
@@ -33,7 +33,7 @@ describe('Player', function(){
 
   it('check player is', function(){
     player.ready(fleetCount)
-    expect(board.set).toHaveBeenCalled();
+    expect(board.isSet).toHaveBeenCalled();
   });
 
   it('places ships on their own board', function(){

@@ -26,7 +26,7 @@ describe('Board', function(){
     });
 
     it('board is not ready', function(){
-      expect(board.set(1)).toBe(false);
+      expect(board.isSet(1)).toBe(false);
     })
     
   });
@@ -61,7 +61,7 @@ describe('Board', function(){
     });
 
     it('board is ready', function(){
-      expect(board.set(1)).toBe(true);
+      expect(board.isSet(1)).toBe(true);
     })
 
   });

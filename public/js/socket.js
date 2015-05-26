@@ -20,6 +20,12 @@ socket.on('place ship', function(message){
 });
 
 socket.on('check board ready', function(ready){
-  if(ready)
+  if(ready){
     $('#placeshipstext').text('Waiting for opponent...');
+    socket.emit('check if game can start');
+  }
 });
+
+socket.on('start game', function(){
+  console.log('game can start');
+})
