@@ -17,7 +17,7 @@ Player.prototype.ready = function(fleetCount) {
 };
 
 Player.prototype.lost = function() {
-  if(this.board.allShipsSunk)
+  if(this.board.allShipsSunk())
     return true;
   return false;
 };

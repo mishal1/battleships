@@ -21,7 +21,7 @@ var id = 1;
 
 io.on('connection', function(socket){
 
-  var player, game;
+  var player, game, opponent;
 
   socket.on('add user', function(name){
     var cells = [];
@@ -46,8 +46,9 @@ io.on('connection', function(socket){
   socket.on('check if game can start', function(){
     game = games[player.gameId]
     if(game && game.canStart(2)){
-      io.sockets.connected[game.player1.socket].emit('start game');
-      io.sockets.connected[game.player2.socket].emit('start game');
+      opponent = getOpponent(player, game);
+      socket.emit('start game');
+      io.sockets.connected[opponent.socket].emit('start game');
     }
   })
 
@@ -57,6 +58,27 @@ io.on('connection', function(socket){
         waitingPlayers.splice(i, 1);
     }
   });
+
+  socket.on('play', function(){
+    game = games[player.gameId]
+    opponent = getOpponent(player, game);
+    if(game.winner()){
+      var winner = game.winner().name;
+      socket.emit('display winner', winner);
+        io.sockets.connected[opponent.socket].emit('display winner', winner);
+    } else {
+      if(game.currentPlayer === player){
+        socket.emit('current player');
+        io.sockets.connected[opponent.socket].emit('wait for opponent');
+      }
+    }
+  });
+
+  socket.on('turn', function(pick){
+    var message = game.turn(pick);
+    socket.emit('update current board', {pick: pick, message: message});
+    io.sockets.connected[opponent.socket].emit('update opponent', {pick: pick, message: message});
+  })
 
 });
 
@@ -75,6 +97,12 @@ var setGame = function(){
   }
   games[id] = game;
   id += 1;
+}
+
+var getOpponent = function(player, game){
+  if(game.player1 === player)
+    return game.player2;
+  return game.player1;
 }
 
 app.get('/', function(request, response){

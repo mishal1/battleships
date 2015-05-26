@@ -96,6 +96,10 @@ img {
   right: 8px;
 }
 
-
+#cross {
+  top: -27px;
+  position: absolute;
+  left: 0px;
+}
 
 

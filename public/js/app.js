@@ -27,3 +27,8 @@ var showOpponentBoard = function(){
   $('.boardtext').css("display", "block");
   $('#placeshipstext').text(' ');
 }
+
+var opponentBoardHit = function(data){
+  var tile = $('#opponent-' + data.pick);
+  tile.append('<img src="img/x.svg" id="cross">');
+}
