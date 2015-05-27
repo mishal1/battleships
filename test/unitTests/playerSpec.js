@@ -4,7 +4,7 @@ describe('Player', function(){
   var player, board, fleetCount;
 
   beforeEach(function(){
-    board = jasmine.createSpyObj('board',['placeShip', 'hit', 'isSet']);
+    board = jasmine.createSpyObj('board',['placeShip', 'hit', 'isSet', 'allShipsSunk']);
     player = new Player('Mishal', 1, board);
     fleetCount = 1;
   });
@@ -43,11 +43,6 @@ describe('Player', function(){
 
   it('has not lost the game', function(){
     expect(player.lost()).toBe(false);
-  });
-
-  it('has not lost the game', function(){
-    board.allShipsSunk = true;
-    expect(player.lost()).toBe(true);
   });
 
   it('can set game id', function(){

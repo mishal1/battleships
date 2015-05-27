@@ -10,20 +10,22 @@ Game.prototype.canStart = function(fleetCount) {
 };
 
 Game.prototype.turn = function(position) {
-  var opponentBoard = this.opponent.board;
-  var message = this.currentPlayer.hit(position, opponentBoard);
+  var message = this.currentPlayer.hit(position, this.opponent.board);
   this.switchTurns();
   return message;
 };
 
 Game.prototype.switchTurns = function() {
   if(this.currentPlayer === this.player1){
-    this.currentPlayer = this.player2
-    this.opponent = this.player1
+    this.setPlayers(this.player2, this.player1);
   } else {
-    this.currentPlayer = this.player1
-    this.opponent = this.player2
+    this.setPlayers(this.player1, this.player2);
   }
+};
+
+Game.prototype.setPlayers = function(player1, player2) {
+  this.currentPlayer = player1
+  this.opponent = player2
 };
 
 Game.prototype.winner = function() {
